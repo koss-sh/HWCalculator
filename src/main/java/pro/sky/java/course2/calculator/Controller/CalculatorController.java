@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 import pro.sky.java.course2.calculator.Service.CalculatorService;
 
 @RestController
-@RequestMapping("/library")
+@RequestMapping("/calculator")
 public class CalculatorController {
 
     private final CalculatorService calculatorService;
@@ -17,16 +17,26 @@ public class CalculatorController {
     }
 
     @GetMapping
-    String hello() {
-        return "ljhasfvsh";
+    String welcome() {
+        return "Добро пожаловать в калькулятор";
     }
-    @GetMapping("/greetings")
-    String showGreetings(@RequestParam String name, @RequestParam String lastName) {
-        return "Hello, " + name + " " + lastName;
+
+    @GetMapping("/plus")
+    String plus(@RequestParam int num1, @RequestParam int num2) {
+        return calculatorService.plus(num1, num2);
     }
-    @GetMapping("/counter")
-    String count() {
-        return "Количество запросов: " + calculatorService.getRequestCount();
+    @GetMapping("/minus")
+    String minus(@RequestParam int num1, @RequestParam int num2) {
+        return calculatorService.minus(num1, num2);
     }
+    @GetMapping("/multiply")
+    String multiply(@RequestParam int num1, @RequestParam int num2) {
+        return calculatorService.multiply(num1, num2);
+    }
+    @GetMapping("/divide")
+    String divide(@RequestParam int num1, @RequestParam int num2) {
+        return calculatorService.divide(num1, num2);
+    }
+
 }
 

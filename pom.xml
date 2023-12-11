@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>pro.sky.java.course2</groupId>
-	<artifactId>web-library</artifactId>
+	<artifactId>calculator</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>web-library</name>
 	<description>Demo project for Spring Boot</description>
