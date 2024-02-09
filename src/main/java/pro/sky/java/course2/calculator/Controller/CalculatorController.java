@@ -22,20 +22,54 @@ public class CalculatorController {
     }
 
     @GetMapping("/plus")
-    String plus(@RequestParam int num1, @RequestParam int num2) {
-        return calculatorService.plus(num1, num2);
+    String plus(@RequestParam(value = "num1", required = false) Integer a,
+                @RequestParam(value = "num2", required = false) Integer b) {
+        return buildView(a, b, "+");
     }
+
     @GetMapping("/minus")
-    String minus(@RequestParam int num1, @RequestParam int num2) {
-        return calculatorService.minus(num1, num2);
+    String minus(@RequestParam(value = "num1", required = false) Integer a,
+                 @RequestParam(value = "num2", required = false) Integer b) {
+        return buildView(a, b, "-");
     }
+
     @GetMapping("/multiply")
-    String multiply(@RequestParam int num1, @RequestParam int num2) {
-        return calculatorService.multiply(num1, num2);
+    String multiply(@RequestParam(value = "num1", required = false) Integer a,
+                    @RequestParam(value = "num2", required = false) Integer b) {
+        return buildView(a, b, "*");
     }
+
     @GetMapping("/divide")
-    String divide(@RequestParam int num1, @RequestParam int num2) {
-        return calculatorService.divide(num1, num2);
+    String divide(@RequestParam(value = "num1", required = false) Integer a,
+                  @RequestParam(value = "num2", required = false) Integer b) {
+        return buildView(a, b, "/");
+    }
+
+    private String buildView(Integer a, Integer b, String operation) {
+        if (a == null || b == null) {
+            return "Не передан один или оба параметра!";
+        }
+        if ("/".equals(operation) && b == 0) {
+            return "Деление на 0 запрещено!";
+        }
+        Number result;
+        switch (operation) {
+            case "+":
+                result = calculatorService.plus(a, b);
+                break;
+            case "-":
+                result = calculatorService.minus(a, b);
+                break;
+            case "*":
+                result = calculatorService.multiply(a, b);
+                break;
+            case "/":
+                result = calculatorService.divide(a, b);
+                break;
+            default:
+                result = calculatorService.plus(a, b);
+        }
+        return a + " " + operation + " " + b + " = " + result;
     }
 
 }
